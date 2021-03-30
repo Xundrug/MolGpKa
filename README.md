@@ -13,6 +13,9 @@ Fast and accurate prediction of the pKa values of small molecules is important i
 * pickle
 
 ## Usage
+
+`example.ipynb` is a example scripts of using MolGpKa. We use 3dmol.js to visualize the calculation results.
+
 This is a example file format for model training, validation and test, including `idx` and `acd_pka`. `idx` is the atom id for the ionizable groupcenter, `acd_pka` is the calculation pka value from ChEMBL database.
 ```
 datasets/mols.sdf
@@ -36,6 +39,7 @@ train_ap.py
 ```
 
 ## Benchmark set for pka substitution effects
+
 We combined some pKa experimental data sets, and then it was processde by mmpdb for matched molecule pair analysis. Finally, We found 2910 pairs of molecules related to the substitution effects, it was listed in `benchmark_delta_pka/experimental_substituents_effects.xlsx`. Then, we filtered case with less than five substituents, the result was shown in `benchmark_delta_pka/experimental_substituents_effects_filter.xlsx`.
 
 
