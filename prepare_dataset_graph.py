@@ -14,6 +14,8 @@ def dump_datasets(dataset, path):
 def generate_datasets(mols):
     datasets = []
     for mol in mols:
+        if not mol:
+            continue
         atom_idx = int(mol.GetProp("idx"))
         pka = float(mol.GetProp("acd_pka"))
         data = mol2vec(mol, atom_idx, evaluation=False, pka=pka)

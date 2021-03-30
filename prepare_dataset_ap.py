@@ -19,6 +19,8 @@ def calc_ap(mol):
 def generate_datasets(mols):
     fps, targets= [], []
     for m in mols:
+        if not m:
+            continue
         fp, pka = calc_ap(m)
         fps.append(fp)
         targets.append(pka)

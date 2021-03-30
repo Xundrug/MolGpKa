@@ -34,3 +34,8 @@ These scripts are designed to construct AP-DNN model which contain data preparat
 prepare_dataset_ap.py
 train_ap.py
 ```
+
+## Benchmark set for pka substitution effects
+We combined some pKa experimental data sets, and then it was processde by mmpdb for matched molecule pair analysis. Finally, We found 2910 pairs of molecules related to the substitution effects, it was listed in `benchmark_delta_pka/experimental_substituents_effects.xlsx`. Then, we filtered case with less than five substituents, the result was shown in `benchmark_delta_pka/experimental_substituents_effects_filter.xlsx`.
+
+
