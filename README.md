@@ -7,6 +7,7 @@ Fast and accurate prediction of the pKa values of small molecules is important i
 * Pytorch 1.4
 * Pytorch-geometric (https://github.com/rusty1s/pytorch_geometric)
 * RDKit (http://www.rdkit.org/docs/Install.html)
+* py3Dmol 
 * sklearn 0.21.3
 * numpy 1.18.1
 * pandas 0.25.3
@@ -14,17 +15,17 @@ Fast and accurate prediction of the pKa values of small molecules is important i
 
 ## Usage
 
-`example.ipynb` is a example scripts of using MolGpKa. We use 3dmol.js to visualize the calculation results.
+`example.ipynb` is an example script for using MolGpKa. We use 3dmol.js to visualize the calculation results.
 
-This is a example file format for model training, validation and test, including `idx` and `acd_pka`. `idx` is the atom id for the ionizable groupcenter, `acd_pka` is the calculation pka value from ChEMBL database.
+This is an example file format for model training, validation and test, including `idx` and `acd_pka`. `idx` is the atom id for the ionizable group center, `acd_pka` is the calculation pka value from ChEMBL database.
 ```
 datasets/mols.sdf
 ```
-This tool only support command line. First, you should prepare the molecular file `mols.sdf` from ChEMBL database like the example. Then you will get two files `train.pickle, valid.pickle` in `datasets` when you run the script for data preparation.
+First, you should prepare the molecular file `mols.sdf` from ChEMBL database like the example. Then you will get two files `train.pickle, valid.pickle` in `datasets/` when you run the script for data preparation.
 ```
 prepare_dataset_graph.py
 ```
-The purpose of this code is to train the graph-convolutional neural network model for pka prediction, the file of weight will save in `models`. You need to train the model for acidic ioniable center and basic ioniable center separately with corresponding data.
+The purpose of this code is to train the graph-convolutional neural network model for pka prediction, the parameter file of MolGpKa will save in `models/`. You need to train the model for acidic ioniable center and basic ioniable center separately with corresponding data.
 ```
 train_graph.py
 ```
