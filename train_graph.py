@@ -7,7 +7,7 @@ from torch import nn
 import torch.nn.functional as F
 from torch_geometric.data import DataLoader
 
-from net import GCNNet
+from utils.net import GCNNet
 
 
 batch_size = 128
