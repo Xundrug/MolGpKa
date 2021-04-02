@@ -27,14 +27,14 @@ Fast and accurate prediction of the pKa values of small molecules is important i
 ### Training model for AP-DNN
 
 ```
-prepare_dataset_ap.py
-train_ap.py
+src/baseline/prepare_dataset_ap.py
+src/baseline/train_ap.py
 ```
-1. These scripts are designed to construct AP-DNN model which contain data preparation and model training.
+These scripts are designed to construct AP-DNN model which contain data preparation and model training.
 
 
 ## Benchmark set for pka substitution effects
 
-In order to test the substitution effects extensively, we created a benchmark set by performing matched molecular pair analysis on experimental pKa data sets collected by Baltruschat et al. The benchmark set contains 2880 data points, it was listed in `benchmark_delta_pka/experimental_substituents_effects.csv`. Then, we filtered case with less than five substituents for visualization, the result was shown in `benchmark_delta_pka/visualization_substituents_effects.xlsx`.
+In order to test the substitution effects extensively, we created a benchmark set by performing matched molecular pair analysis on experimental pKa data sets collected by Baltruschat et al. The benchmark set contains 4322 data points. it was listed in `benchmark_delta_pka/experimental_substituents_effects.csv`. Then, we filtered case with less than five substituents for visualization, the result was shown in `benchmark_delta_pka/visualization_substituents_effects.xlsx`.
 
 
