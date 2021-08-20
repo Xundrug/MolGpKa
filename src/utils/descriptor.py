@@ -58,16 +58,15 @@ def get_atom_features(mol, aid):
         atom = mol.GetAtomWithIdx(atom_idx)
 
         o = []
-
         o += one_hot(atom.GetSymbol(), ['C', 'H', 'O', 'N', 'S', 'Cl', 'F', 'Br', 'P',
                                         'I'])
-        o += one_hot(atom.GetDegree(), [0, 1, 2, 3, 4, 5, 6])
+        o += [atom.GetDegree()]
         o += one_hot(atom.GetHybridization(), [Chem.rdchem.HybridizationType.SP,
                                                Chem.rdchem.HybridizationType.SP2,
                                                Chem.rdchem.HybridizationType.SP3,
                                                Chem.rdchem.HybridizationType.SP3D,
                                                Chem.rdchem.HybridizationType.SP3D2])
-        o += one_hot(atom.GetImplicitValence(), [0, 1, 2, 3, 4, 5, 6])
+        o += [atom.GetImplicitValence()]
         o += [atom.GetIsAromatic()]
         o += [ring.IsAtomInRingOfSize(atom_idx, 3),
               ring.IsAtomInRingOfSize(atom_idx, 4),
@@ -75,8 +74,14 @@ def get_atom_features(mol, aid):
               ring.IsAtomInRingOfSize(atom_idx, 6),
               ring.IsAtomInRingOfSize(atom_idx, 7),
               ring.IsAtomInRingOfSize(atom_idx, 8)]
+
         o += [atom_idx in hydrogen_donor_match]
         o += [atom_idx in hydrogen_acceptor_match]
+        o += [atom.GetFormalCharge()]
+        if atom_idx == aid:
+            o += [0]
+        else:
+            o += [len(Chem.rdmolops.GetShortestPath(mol, atom_idx, aid))]
 
         if atom_idx == aid:
             o += [True]

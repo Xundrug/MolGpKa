@@ -59,6 +59,7 @@ def predict(mol, uncharged=True):
     if uncharged:
         un = rdMolStandardize.Uncharger()
         mol = un.uncharge(mol)
+        mol = Chem.MolFromSmiles(Chem.MolToSmiles(mol))
     mol = AllChem.AddHs(mol)
     base_dict = predict_base(mol)
     acid_dict = predict_acid(mol)

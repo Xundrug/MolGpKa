@@ -4,13 +4,15 @@ import torch.nn.functional as F
 from torch import nn
 from torch.nn import Linear
 from torch.nn import BatchNorm1d
-from torch_geometric.nn import GCNConv, GATConv
+from torch_geometric.nn import GCNConv, GATConv, GlobalAttention
 from torch_geometric.nn import global_add_pool, global_mean_pool
 from torch_geometric.data import DataLoader
 
-n_features = 39
 
-class GCNNet(nn.Module):
+n_features = 29
+hidden = 1024
+
+class GCNNet(torch.nn.Module):
     def __init__(self):
         super(GCNNet, self).__init__()
         self.conv1 = GCNConv(n_features, 1024, cached=False) # if you defined cache=True, the shape of batch must be same!
@@ -24,13 +26,25 @@ class GCNNet(nn.Module):
         self.conv5 = GCNConv(512, 1024, cached=False)
         self.bn5 = BatchNorm1d(1024)
 
+        self.att = GlobalAttention(Linear(hidden, 1))
         self.fc2 = Linear(1024, 128)
         self.fc3 = Linear(128, 16)
         self.fc4 = Linear(16, 1)
 
-    def forward(self, data):
-        x, edge_index, edge_attr, batch = data.x, data.edge_index, data.edge_attr, data.batch
+    def reset_parameters(self):
+        self.conv1.reset_parameters()
+        self.conv2.reset_parameters()
+        self.conv3.reset_parameters()
+        self.conv4.reset_parameters()
+        self.conv5.reset_parameters()
 
+        self.att.reset_parameters()
+        self.fc2.reset_parameters()
+        self.fc3.reset_parameters()
+        self.fc4.reset_parameters()
+
+    def forward(self, data):
+        x, edge_index, batch = data.x, data.edge_index, data.batch
         x = F.relu(self.conv1(x, edge_index))
         x = self.bn1(x)
         x = F.relu(self.conv2(x, edge_index))
@@ -41,12 +55,10 @@ class GCNNet(nn.Module):
         x = self.bn4(x)
         x = F.relu(self.conv5(x, edge_index))
         x = self.bn5(x)
-        x = global_add_pool(x, batch)
+        x = self.att(x, batch)
 
         x = F.relu(self.fc2(x))
-        x = F.dropout(x, p=0.2, training=self.training)
         x = F.relu(self.fc3(x))
-        x = F.dropout(x, p=0.2, training=self.training)
         x = self.fc4(x)
         return x
 
