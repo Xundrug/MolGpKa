@@ -51,14 +51,16 @@ def match_acid(df_smarts_acid, mol):
 
 def match_base(df_smarts_base, mol):
     matches = []
-    for idx, name, smarts, index, acid_base in df_smarts_base.itertuples():
+    for idx, name, smarts, indexs, acid_base in df_smarts_base.itertuples():
         pattern = Chem.MolFromSmarts(smarts)
         match = mol.GetSubstructMatches(pattern)
         if len(match) == 0:
             continue
-        index = int(index)
-        for m in match:
-            matches.append([m[index]])
+        index_split = indexs.split(",")
+        for index in index_split:
+            index = int(index)
+            for m in match:
+                matches.append([m[index]])
     matches = unique_acid_match(matches)
     matches_modify = []
     for i in matches:
