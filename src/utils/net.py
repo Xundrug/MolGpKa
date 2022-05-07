@@ -4,7 +4,8 @@ import torch.nn.functional as F
 from torch import nn
 from torch.nn import Linear
 from torch.nn import BatchNorm1d
-from torch_geometric.nn import GCNConv, GATConv, GlobalAttention
+from utils.gcn_conv import GCNConv
+from torch_geometric.nn import GATConv, GlobalAttention
 from torch_geometric.nn import global_add_pool, global_mean_pool
 from torch_geometric.data import DataLoader
 
