@@ -1,0 +1,8 @@
+**/.idea/
+**/__pycache__
+**/.ipynb_checkpoints
+**/*.log
+**/.vscode/
+*.bkp
+**/.vscode
+**/.vs
