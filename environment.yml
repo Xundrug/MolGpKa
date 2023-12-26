@@ -1,0 +1,18 @@
+name: MolGpKa
+channels:
+  - rdkit
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6
+  - jupyter
+  - pytorch=1.4
+  - scikit-learn=0.21.3
+  - scikit-learn-intelex
+  - numpy=1.18.1
+  - pandas=0.25.3
+  - rdkit
+  - pip:
+    - py3Dmol
+    - requests
+    - git+https://github.com/pyg-team/pytorch_geometric
