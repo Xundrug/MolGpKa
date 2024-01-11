@@ -1,6 +1,9 @@
 # MolGpKa
 Fast and accurate prediction of the pKa values of small molecules is important in the drug discovery process since the ionization state of a drug has significant influence on its activity and ADME-Tox properties. MolGpKa is a tool for pKa prediction using graph-convolutional neural network model. The model works by learning pKa related chemical patterns automatically and building reliable predictors with learned features.
 
+## Addendum installation
+See the Docker_README.md file
+
 ## Requirements
 
 * Python 3.6
